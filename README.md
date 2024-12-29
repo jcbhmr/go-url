@@ -7,16 +7,21 @@
 ```go
 x := url.NewURL("https://example.org/store/search?q=cool#results", nil)
 fmt.Printf("origin=%s\n", x.Origin())
+
 q, _ := x.SearchParams().Get("q")
 fmt.Printf("q=%s\n", q)
-fmt.Printf("pathname=%s\n", x.Pathname())
-url.SetPathname("/menu/search")
-fmt.Printf("href=%s\n", x.Href())
+
+fmt.Printf("before=%s\n", x.Href())
+url.SetPathname("/menu")
+url.SetSearch("")
+url.SetHash("")
+fmt.Printf("after=%s\n", x.Href())
+
 // Output:
 // origin=https://example.org
 // q=cool
-// pathname=/store/search
-// href=https://example.org/menu/search?q=cool#results
+// before=https://example.org/store/search?q=cool#results
+// after=https://example.org/menu
 ```
 
 </table>
